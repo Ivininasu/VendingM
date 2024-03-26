@@ -1,1 +1,3 @@
-# VendingM
+---
+permalink: /index.html
+---
