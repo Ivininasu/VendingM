@@ -3,10 +3,13 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
+    background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg'); /* Add your background image URL here */
+    background-size: cover;
 }
 
 h1 {
     margin-top: 20px;
+    color: white; /* Set text color to white for better readability */
 }
 
 .products {
@@ -28,6 +31,7 @@ h1 {
 
 .product p {
     margin-top: 10px;
+    color: white; /* Set text color to white for better readability */
 }
 
 input[type="number"] {
