@@ -12,16 +12,19 @@
         <div class="product">
             <img src="https://www.bigbasket.com/media/uploads/p/xxl/102745_13-lays-potato-chips-american-style-cream-onion-flavour.jpg" alt="Product 1">
             <p>Product 1</p>
+            <p>Rs.10</p>
             <input type="number" id="product1Quantity" value="0" min="0">
         </div>
         <div class="product">
             <img src="https://m.media-amazon.com/images/I/71uGU7evScL._AC_UF1000,1000_QL80_.jpg" alt="Product 2">
             <p>Product 2</p>
+            <p>Rs.20</p>
             <input type="number" id="product2Quantity" value="0" min="0">
         </div>
         <div class="product">
             <img src="https://www.quickpantry.in/cdn/shop/products/britannia-treat-chocolate-cream-biscuits-60-g-quick-pantry_500x500.jpg?v=1710538227" alt="Product 3">
             <p>Product 3</p>
+            <p>Rs.15</p>
             <input type="number" id="product3Quantity" value="0" min="0">
         </div>
     </div>
@@ -29,6 +32,27 @@
     <a href="admin-login.html">Admin Login</a>
 
     <script>
+        <script>
+        function calculateTotal(productNumber) {
+            var quantity = document.getElementById("product" + productNumber + "Quantity").value;
+            var pricePerUnit;
+            switch (productNumber) {
+                case 1:
+                    pricePerUnit = 10;
+                    break;
+                case 2:
+                    pricePerUnit = 20;
+                    break;
+                case 3:
+                    pricePerUnit = 15;
+                    break;
+                default:
+                    pricePerUnit = 0;
+                    break;
+            }
+            var totalPrice = quantity * pricePerUnit;
+            document.getElementById("product" + productNumber + "Total").innerText = "$" + totalPrice.toFixed(2);
+        }
         function proceedToPayment() {
             // Redirect to payment page
             window.location.href = "payment.html";
