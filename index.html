@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vending Machine</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
+    <script>        
         function calculateTotal(productNumber) {
             var quantity = document.getElementById("product" + productNumber + "Quantity").value;
             var pricePerUnit;
@@ -30,13 +30,46 @@
             var product3Total = parseFloat(document.getElementById("product3Total").innerText.replace("Rs.", "")) || 0;
 
             var grandTotal = product1Total + product2Total + product3Total;
-            document.getElementById("grandTotal").innerText = "Rs." + grandTotal.toFixed(2);
+            document.getElementById("grandTotal").innerText = grandTotal.toFixed(2);
         }
 
-        function proceedToPayment() {
-            // Redirect to payment page
-            window.location.href = "payment.html";
+        function displaySVGInPopup(svg) {
+            const popup = window.open('', 'SVG Image', 'width=400,height=400');
+            popup.document.body.innerHTML = svg;
         }
+
+        async function proceedToPayment() {
+
+            const url = 'https://upiqr.in/api/qr';
+
+            const data = {
+            name: 'EEE Vending Machine',
+            vpa: "9605706877@ibl",
+            amount: document.getElementById("grandTotal").innerText
+            };
+
+            try {
+                const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+
+                const svgImage = await response.text();
+                displaySVGInPopup(svgImage);
+                return svgImage;
+            } catch (error) {
+                console.error('Error fetching SVG image:', error);
+                return null;
+            }
+            }
+
     </script>
 </head>
 <body>
@@ -64,7 +97,7 @@
             <p>Total: <span id="product3Total">0.00</span></p>
         </div>
     </div>
-    <p>Grand Total: <span id="grandTotal">$0.00</span></p>
+    <p>Grand Total: Rs.<span id="grandTotal">0.00</span></p>
     <button onclick="proceedToPayment()">Proceed to Payment</button>
     <a href="admin-login.html">Admin Login</a>
 </body>
