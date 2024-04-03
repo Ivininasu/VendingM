@@ -5,39 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vending Machine</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function calculateTotal(productNumber) {
-            var quantity = document.getElementById("product" + productNumber + "Quantity").value;
-            var pricePerUnit;
-            switch (productNumber) {
-                case 1:
-                    pricePerUnit = 15;
-                    break;
-                case 2:
-                    pricePerUnit = 10;
-                    break;
-                case 3:
-                    pricePerUnit = 25;
-                    break;
-                default:
-                    pricePerUnit = 0;
-                    break;
-            }
-            var totalPrice = quantity * pricePerUnit;
-            document.getElementById("product" + productNumber + "Total").innerText = "Rs." + totalPrice.toFixed(2);
-            var grandTotal = parseFloat(document.getElementById("product1Total").innerText.replace("$", "")) +
-                             parseFloat(document.getElementById("product2Total").innerText.replace("$", "")) +
-                             parseFloat(document.getElementById("product3Total").innerText.replace("$", ""));
-            document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
-            var grandTotal = product1Total + product2Total + product3Total;
-            document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2); 
-        }
 
-        function proceedToPayment() {
-            // Redirect to payment page
-            window.location.href = "payment.html";
-        }
-    </script>
 </head>
 <body>
     <h1>Welcome to the Vending Machine</h1>
@@ -64,8 +32,47 @@
             <p>Total: <span id="product3Total">0.00</span></p>
         </div>
     </div>
-    <p>Grand Total: <span id="grandTotal">0.00</span></p> 
+    <p>Grand Total: <span id="grandTotal">$0.00</span></p> 
     <button onclick="proceedToPayment()">Proceed to Payment</button>
     <a href="admin-login.html">Admin Login</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // DOM fully loaded, so we can safely manipulate the elements
+            function calculateTotal(productNumber) {
+                var quantity = parseFloat(document.getElementById("product" + productNumber + "Quantity").value) || 0;
+                var pricePerUnit;
+                switch (productNumber) {
+                    case 1:
+                        pricePerUnit = 15;
+                        break;
+                    case 2:
+                        pricePerUnit = 10;
+                        break;
+                    case 3:
+                        pricePerUnit = 25;
+                        break;
+                    default:
+                        pricePerUnit = 0;
+                        break;
+                }
+                var totalPrice = quantity * pricePerUnit;
+                document.getElementById("product" + productNumber + "Total").innerText = "$" + totalPrice.toFixed(2);
+
+                // Recalculate grand total
+                var product1Total = parseFloat(document.getElementById("product1Total").innerText.replace("$", "")) || 0;
+                var product2Total = parseFloat(document.getElementById("product2Total").innerText.replace("$", "")) || 0;
+                var product3Total = parseFloat(document.getElementById("product3Total").innerText.replace("$", "")) || 0;
+
+                var grandTotal = product1Total + product2Total + product3Total;
+                document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
+            }
+
+            function proceedToPayment() {
+                // Redirect to payment page
+                window.location.href = "payment.html";
+            }
+        });
+    </script>
 </body>
 </html>
