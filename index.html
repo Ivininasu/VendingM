@@ -25,6 +25,10 @@
             }
             var totalPrice = quantity * pricePerUnit;
             document.getElementById("product" + productNumber + "Total").innerText = "Rs." + totalPrice.toFixed(2);
+            var grandTotal = parseFloat(document.getElementById("product1Total").innerText.replace("$", "")) +
+                             parseFloat(document.getElementById("product2Total").innerText.replace("$", "")) +
+                             parseFloat(document.getElementById("product3Total").innerText.replace("$", ""));
+            document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
         }
 
         function proceedToPayment() {
