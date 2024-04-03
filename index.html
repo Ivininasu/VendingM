@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vending Machine</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function calculateTotal(productNumber) {
+            var quantity = document.getElementById("product" + productNumber + "Quantity").value;
+            var pricePerUnit;
+            switch (productNumber) {
+                case 1:
+                    pricePerUnit = 1.50;
+                    break;
+                case 2:
+                    pricePerUnit = 2.00;
+                    break;
+                case 3:
+                    pricePerUnit = 1.75;
+                    break;
+                default:
+                    pricePerUnit = 0;
+                    break;
+            }
+            var totalPrice = quantity * pricePerUnit;
+            document.getElementById("product" + productNumber + "Total").innerText = "$" + totalPrice.toFixed(2);
+        }
+
+        function proceedToPayment() {
+            // Redirect to payment page
+            window.location.href = "payment.html";
+        }
+    </script>
 </head>
 <body>
     <h1>Welcome to the Vending Machine</h1>
@@ -33,41 +60,5 @@
     </div>
     <button onclick="proceedToPayment()">Proceed to Payment</button>
     <a href="admin-login.html">Admin Login</a>
-
-    <script>
-        function calculateTotal(productNumber) {
-            console.log("calculateTotal function called for product " + productNumber);
-            
-            var quantity = document.getElementById("product" + productNumber + "Quantity").value;
-            console.log("Quantity for product " + productNumber + ": " + quantity);
-            
-            var pricePerUnit;
-            switch (productNumber) {
-                case 1:
-                    pricePerUnit = 1.50;
-                    break;
-                case 2:
-                    pricePerUnit = 2.00;
-                    break;
-                case 3:
-                    pricePerUnit = 1.75;
-                    break;
-                default:
-                    pricePerUnit = 0;
-                    break;
-            }
-            console.log("Price per unit for product " + productNumber + ": " + pricePerUnit);
-            
-            var totalPrice = quantity * pricePerUnit;
-            console.log("Total price for product " + productNumber + ": " + totalPrice);
-            
-            document.getElementById("product" + productNumber + "Total").innerText = "$" + totalPrice.toFixed(2);
-        }
-
-        function proceedToPayment() {
-            // Redirect to payment page
-            window.location.href = "payment.html";
-        }
-    </script>
 </body>
 </html>
