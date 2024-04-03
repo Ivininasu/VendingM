@@ -29,6 +29,8 @@
                              parseFloat(document.getElementById("product2Total").innerText.replace("$", "")) +
                              parseFloat(document.getElementById("product3Total").innerText.replace("$", ""));
             document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
+            var grandTotal = product1Total + product2Total + product3Total;
+            document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2); 
         }
 
         function proceedToPayment() {
@@ -62,6 +64,7 @@
             <p>Total: <span id="product3Total">0.00</span></p>
         </div>
     </div>
+    <p>Grand Total: <span id="grandTotal">0.00</span></p> 
     <button onclick="proceedToPayment()">Proceed to Payment</button>
     <a href="admin-login.html">Admin Login</a>
 </body>
