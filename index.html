@@ -94,7 +94,9 @@
                     // Check if the response is a success
                     if (data.status === 'success') {
                         console.log('Payment verified successfully!');
+                        popup.close();
                         alert('Payment verified successfully!');
+
                         location.reload();
                     } else {
                         // If not successful, log failure and retry after 2 seconds
