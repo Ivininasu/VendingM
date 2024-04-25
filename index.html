@@ -36,6 +36,7 @@
         function displaySVGInPopup(svg) {
             const popup = window.open('', 'SVG Image', 'width=400,height=400');
             popup.document.body.innerHTML = svg;
+            return popup;
         }
 
         async function proceedToPayment() {
@@ -62,10 +63,10 @@
                 }
 
                 const svgImage = await response.text();
-                displaySVGInPopup(svgImage);
+                popup = displaySVGInPopup(svgImage);
                 callAPIUntilSuccess();
 
-                return svgImage;
+                return;
             } catch (error) {
                 console.error('Error fetching SVG image:', error);
                 return null;
@@ -74,14 +75,16 @@
             
             function callAPIUntilSuccess() {
             const url = 'https://vending.amalpaul.in/verifypayment';
-
             const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    amount: document.getElementById("grandTotal").innerText
+                    amount: document.getElementById("grandTotal").innerText,
+                    slot1: document.getElementById("product1Quantity").value,
+                    slot2: document.getElementById("product2Quantity").value,
+                    slot3: document.getElementById("product3Quantity").value
                 })
             };
 
